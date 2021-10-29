@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>26.0.0</version>
+		<relativePath />
+	</parent>
+
+	<groupId>ImageJ-ResearchPlugins</groupId>
+	<artifactId>ImageJ-ResearchPlugins</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<name>ImageJ Research Plugins</name>
+	<description>This builds ImageJ plugins into a single jar file for use with Fiji.</description>
+	<url>https://github.com/jaywarrick/ImageJ-ResearchPlugins</url>
+	<inceptionYear>2021</inceptionYear>
+	<organization>
+		<name>Jay Warrick</name>
+		<url>https://github.com/jaywarrick</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>none</name>
+<!-- 			<url>https://unlicense.org/</url> -->
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>jaywarrick</id>
+			<name>Jay Warrick</name>
+<!-- 			<url>https://imagej.net/User:[MY-IMAGEJ-WIKI-ACCOUNT]</url> -->
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>None</name>
+		</contributor>
+	</contributors>
+
+	<mailingLists>
+		<mailingList>
+	      <name>User List</name>
+	      <subscribe>user-subscribe@127.0.0.1</subscribe>
+	      <unsubscribe>user-unsubscribe@127.0.0.1</unsubscribe>
+	      <post>user@127.0.0.1</post>
+	      <archive>http://127.0.0.1/user/</archive>
+	      <otherArchives>
+        <otherArchive>http://base.google.com/base/1/127.0.0.1</otherArchive>
+      </otherArchives>
+    </mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:git:git://github.com/jaywarrick/ImageJ-ResearchPlugins</connection>
+		<developerConnection>scm:git:git@github.com:jaywarrick/ImageJ-ResearchPlugins</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/jaywarrick/ImageJ-ResearchPlugins</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>http://github.com/jaywarrick/ImageJ-ResearchPlugins/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>None</system>
+	</ciManagement>
+
+	<properties>
+<!-- 		<main-class>OpenScaleSaveImage</main-class> -->
+		<license.licenseName>MIT</license.licenseName>
+		<license.copyrightOwners>Jay Warrick and Erwin Berthier</license.copyrightOwners>
+		<license.projectName>ImageJ plugins for image processing and analysis.</license.projectName>
+		<enforcer.skip>true</enforcer.skip>
+<!-- 		<bio-formats.version>5.4.1.SNAPSHOT</bio-formats.version> -->
+<!-- 		<scifio-bf-compat.version>1.9.0</scifio-bf-compat.version> -->
+		<imagej-ops.version>0.44.1-SNAPSHOT</imagej-ops.version>
+		<imglib2.version>5.7.1-SNAPSHOT</imglib2.version>
+		<imglib2-roi.version>0.5.1-SNAPSHOT</imglib2-roi.version>
+
+		<!-- NB: Deploy releases to the SciJava Maven repository. -->
+		<releaseProfiles>deploy-to-scijava</releaseProfiles>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>scijava.public</id>
+			<url>https://maven.scijava.org/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- ImageJ dependencies -->
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-ops</artifactId>
+		</dependency>
+		
+		<!-- ImgLib2 dependencies -->
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2-roi</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.lingala.zip4j</groupId>
+			<artifactId>zip4j</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.rosuda.REngine</groupId>
+			<artifactId>Rserve</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		
+		<!-- ImageJ Plugin dependencies -->
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>TrackMate_</artifactId>
+			<!-- <version>2.6.1</version> -->
+		</dependency>
+
+		<dependency>
+			<groupId>fr.inra.ijpb</groupId>
+			<artifactId>MorphoLibJ_</artifactId>
+			<!-- <version>2.6.1</version> -->
+		</dependency>
+
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>Colocalisation_Analysis</artifactId>
+			<!-- <version>2.2.1</version> -->
+		</dependency>
+
+		<!-- Thresholding stuff -->
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>Auto_Threshold</artifactId>
+			<!-- <version>1.16.0</version> -->
+		</dependency>
+
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>Auto_Local_Threshold</artifactId>
+			<!-- <version>1.16.0</version> -->
+		</dependency>
+
+		<!-- <dependency> REMOVED AS IT SORT OF DUPILICATES AND BLOWS UP IN SIZE 
+			WHAT IS INCLUDED BY weka-dev <groupId>nz.ac.waikato.cms.moa</groupId> <artifactId>weka-package</artifactId> 
+			<version>2014.04</version> </dependency> -->
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-dev</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.scijava</groupId>
+			<artifactId>scijava-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<!-- <version>3.4.1</version> -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.jhotdraw</groupId>
+		    <artifactId>jhotdraw</artifactId>
+		    <version>7.4.1</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+<!--         <version>3.2.0</version> -->
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+<!--               <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory> -->
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>false</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
