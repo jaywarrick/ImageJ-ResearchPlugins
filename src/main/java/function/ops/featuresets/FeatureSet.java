@@ -27,51 +27,32 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
+
 package function.ops.featuresets;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.scijava.plugin.Plugin;
-
-import net.imglib2.RealLocalizable;
-import net.imglib2.roi.labeling.LabelRegion;
-import net.imglib2.type.numeric.real.DoubleType;
+import net.imagej.ops.OpRef;
+import net.imagej.ops.special.function.UnaryFunctionOp;
+import net.imglib2.type.numeric.RealType;
 
 /**
- * {@link FeatureSet} to calculate {@link AbstractOpRefFeatureSet<I, O>}.
+ * A {@link Set} of features which are calculated in combination.
+ * {@link FeatureSet}s can provide optimized computations for the calculated
+ * {@link OpRef}s.
  * 
- * @author Tim-Oliver Buchholz, University of Konstanz
- * @author jaywarrick
+ * @author Christian Dietz, University of Konstanz
  * @param <I>
  * @param <O>
  */
-@SuppressWarnings("rawtypes")
-@Plugin(type = FeatureSet.class, label = "Centroid", description = "Calculates the Centroid")
-public class CentroidFeatureSet extends AbstractFeatureSet<LabelRegion, DoubleType> {
+public interface FeatureSet<I, O extends RealType<O>> extends UnaryFunctionOp<I, Map<NamedFeature, O>> {
 
-	@Override
-	public List<NamedFeature> getFeatures() {
-		List<NamedFeature> fs = new ArrayList<NamedFeature>();
-
-		for (int i = 0; i < in().numDimensions(); i++) {
-			fs.add(new NamedFeature("Centroid of dimension#" + i));
-		}
-		return fs;
-	}
-
-	@Override
-	public Map<NamedFeature, DoubleType> calculate(LabelRegion input) {
-		Map<NamedFeature, DoubleType> res = new LinkedHashMap<NamedFeature, DoubleType>();
-		RealLocalizable centroid = ops().geom().centroid(input);
-
-		for (int i = 0; i < getFeatures().size(); i++) {
-			res.put(new NamedFeature("Centroid of dimension#" + i), new DoubleType(centroid.getDoublePosition(i)));
-		}
-
-		return res;
-	}
+	/**
+	 * @return all {@link NamedFeature}s which are supported by this feature
+	 *         set.
+	 */
+	List<NamedFeature> getFeatures();
 
 }

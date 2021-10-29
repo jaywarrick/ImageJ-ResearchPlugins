@@ -4,7 +4,7 @@ import org.scijava.Priority;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
-import net.imagej.ops.Ops;
+import function.ops.JEXOps;
 import net.imagej.ops.special.function.AbstractBinaryFunctionOp;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
@@ -16,9 +16,9 @@ import net.imglib2.type.numeric.real.DoubleType;
 import net.imglib2.util.Pair;
 import utilities.FeatureUtils;
 
-@Plugin(type = Ops.Stats.PearsonsCorrelationCoefficient.class, priority = Priority.NORMAL)
+@Plugin(type = JEXOps.PearsonsCorrelationCoefficient.class, priority = Priority.NORMAL)
 public class DefaultPearsonsCorrelationCoefficient<I1 extends RealType<I1>> extends AbstractBinaryFunctionOp<Pair<RandomAccessibleInterval<I1>, RandomAccessibleInterval<I1>>, Cursor<Void>, DoubleType>
-implements Ops.Stats.PearsonsCorrelationCoefficient {
+implements JEXOps.PearsonsCorrelationCoefficient {
 	
 	@Parameter(required = false)
 	Double imMean1 = null;

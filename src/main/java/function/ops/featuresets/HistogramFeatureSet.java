@@ -35,8 +35,6 @@ import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
 import function.ops.histogram.BoundedHistogramCreate;
-import net.imagej.ops.featuresets.AbstractIteratingFeatureSet;
-import net.imagej.ops.featuresets.FeatureSet;
 import net.imagej.ops.special.function.Functions;
 import net.imagej.ops.special.function.UnaryFunctionOp;
 import net.imglib2.histogram.Histogram1d;

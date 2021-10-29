@@ -27,51 +27,82 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
+
 package function.ops.featuresets;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.scijava.plugin.Plugin;
-
-import net.imglib2.RealLocalizable;
-import net.imglib2.roi.labeling.LabelRegion;
-import net.imglib2.type.numeric.real.DoubleType;
+import net.imglib2.type.numeric.RealType;
 
 /**
- * {@link FeatureSet} to calculate {@link AbstractOpRefFeatureSet<I, O>}.
+ * {@link FeatureSet} to calculate features which are organized in a structure,
+ * accessible via an index. Typical example is {@link HistogramFeatureSet}.
  * 
- * @author Tim-Oliver Buchholz, University of Konstanz
- * @author jaywarrick
- * @param <I>
- * @param <O>
+ * @author Christian Dietz (University of Konstanz)
+ * @param <T>
  */
-@SuppressWarnings("rawtypes")
-@Plugin(type = FeatureSet.class, label = "Centroid", description = "Calculates the Centroid")
-public class CentroidFeatureSet extends AbstractFeatureSet<LabelRegion, DoubleType> {
+public abstract class AbstractIteratingFeatureSet<I, O extends RealType<O>>
+	extends AbstractFeatureSet<I, O> implements FeatureSet<I, O>
+{
+
+	private ArrayList<NamedFeature> infos;
 
 	@Override
-	public List<NamedFeature> getFeatures() {
-		List<NamedFeature> fs = new ArrayList<NamedFeature>();
+	public void initialize() {
+		super.initialize();
 
-		for (int i = 0; i < in().numDimensions(); i++) {
-			fs.add(new NamedFeature("Centroid of dimension#" + i));
+		infos = new ArrayList<NamedFeature>();
+
+		for (int i = 0; i < getNumEntries(); i++) {
+			final int f = i;
+			infos.add(new NamedFeature(getNamePrefix() + " " + f));
 		}
-		return fs;
 	}
 
 	@Override
-	public Map<NamedFeature, DoubleType> calculate(LabelRegion input) {
-		Map<NamedFeature, DoubleType> res = new LinkedHashMap<NamedFeature, DoubleType>();
-		RealLocalizable centroid = ops().geom().centroid(input);
+	public Map<NamedFeature, O> calculate(final I input) {
+		final Map<NamedFeature, O> res = new HashMap<NamedFeature, O>();
 
-		for (int i = 0; i < getFeatures().size(); i++) {
-			res.put(new NamedFeature("Centroid of dimension#" + i), new DoubleType(centroid.getDoublePosition(i)));
+		preCompute(input);
+
+		int i = 0;
+		for (final NamedFeature info : infos) {
+			res.put(info, getResultAtIndex(i));
+			i++;
 		}
 
 		return res;
 	}
 
+	@Override
+	public List<NamedFeature> getFeatures() {
+		return infos;
+	}
+
+	/**
+	 * Called once before getResultAtIndex is called subsequently for each entry
+	 * in the {@link FeatureSet}.
+	 * 
+	 * @param input the input
+	 */
+	protected abstract void preCompute(final I input);
+
+	/**
+	 * @param i index
+	 * @return result hat given index
+	 */
+	protected abstract O getResultAtIndex(int i);
+
+	/**
+	 * @return number of entries in feature-set
+	 */
+	protected abstract int getNumEntries();
+
+	/**
+	 * @return semantic label prefix for the entries of the feature-set
+	 */
+	protected abstract String getNamePrefix();
 }

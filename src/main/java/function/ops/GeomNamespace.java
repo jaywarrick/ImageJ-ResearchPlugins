@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.scijava.plugin.Plugin;
 
+import function.ops.geometry.Circle;
 import net.imagej.ops.AbstractNamespace;
 import net.imagej.ops.Namespace;
 import net.imagej.ops.OpMethod;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.RealCursor;
 import net.imglib2.RealLocalizable;

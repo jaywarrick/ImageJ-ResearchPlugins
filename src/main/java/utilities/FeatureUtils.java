@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import IJ2.IJ2PluginUtility;
 import function.ops.JEXOps;
+import function.ops.geometry.Circle;
 import function.ops.intervals.CroppedRealRAI;
 import function.ops.intervals.IntersectedBooleanRAI;
 import function.ops.intervals.MapIIToSamplingRAI;
@@ -26,7 +27,6 @@ import image.roi.PointSamplerList;
 import image.roi.ROIPlus;
 import net.imagej.ops.Op;
 import net.imagej.ops.Ops;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imagej.ops.special.function.Functions;
 import net.imagej.ops.special.function.UnaryFunctionOp;
 import net.imglib2.Cursor;

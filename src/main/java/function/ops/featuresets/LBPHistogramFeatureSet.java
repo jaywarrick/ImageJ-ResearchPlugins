@@ -36,8 +36,6 @@ import java.util.ArrayList;
 import org.scijava.plugin.Plugin;
 
 import function.ops.lbp.Default8BitUniformLBP2D;
-import net.imagej.ops.featuresets.AbstractIteratingFeatureSet;
-import net.imagej.ops.featuresets.FeatureSet;
 import net.imagej.ops.image.histogram.HistogramCreate;
 import net.imagej.ops.special.function.Functions;
 import net.imagej.ops.special.function.UnaryFunctionOp;

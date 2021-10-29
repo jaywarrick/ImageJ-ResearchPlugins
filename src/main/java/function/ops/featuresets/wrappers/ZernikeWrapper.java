@@ -4,10 +4,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import IJ2.IJ2PluginUtility;
+import function.ops.featuresets.NamedFeature;
 import function.ops.featuresets.ZernikeFeatureSet;
+import function.ops.geometry.Circle;
 import helper.objects.Canceler;
-import net.imagej.ops.featuresets.NamedFeature;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imglib2.IterableInterval;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.type.numeric.real.DoubleType;

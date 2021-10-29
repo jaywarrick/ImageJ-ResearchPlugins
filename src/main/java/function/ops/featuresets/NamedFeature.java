@@ -1,3 +1,5 @@
+package function.ops.featuresets;
+
 /*
  * #%L
  * ImageJ software for multidimensional image processing and analysis.
@@ -27,51 +29,67 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
-package function.ops.featuresets;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import org.scijava.Named;
 
-import org.scijava.plugin.Plugin;
-
-import net.imglib2.RealLocalizable;
-import net.imglib2.roi.labeling.LabelRegion;
-import net.imglib2.type.numeric.real.DoubleType;
+import net.imagej.ops.OpRef;
 
 /**
- * {@link FeatureSet} to calculate {@link AbstractOpRefFeatureSet<I, O>}.
+ * Simple semantic description of an arbitrary feature
  * 
- * @author Tim-Oliver Buchholz, University of Konstanz
- * @author jaywarrick
- * @param <I>
- * @param <O>
+ * @author Christian Dietz, University of Konstanz
  */
-@SuppressWarnings("rawtypes")
-@Plugin(type = FeatureSet.class, label = "Centroid", description = "Calculates the Centroid")
-public class CentroidFeatureSet extends AbstractFeatureSet<LabelRegion, DoubleType> {
+public class NamedFeature implements Named {
 
-	@Override
-	public List<NamedFeature> getFeatures() {
-		List<NamedFeature> fs = new ArrayList<NamedFeature>();
+	private final String name;
+	private OpRef ref;
 
-		for (int i = 0; i < in().numDimensions(); i++) {
-			fs.add(new NamedFeature("Centroid of dimension#" + i));
-		}
-		return fs;
+	public NamedFeature(String name) {
+		this.name = name;
+	}
+
+	public NamedFeature(OpRef ref) {
+		this(ref.getLabel());
+		this.ref = ref;
 	}
 
 	@Override
-	public Map<NamedFeature, DoubleType> calculate(LabelRegion input) {
-		Map<NamedFeature, DoubleType> res = new LinkedHashMap<NamedFeature, DoubleType>();
-		RealLocalizable centroid = ops().geom().centroid(input);
-
-		for (int i = 0; i < getFeatures().size(); i++) {
-			res.put(new NamedFeature("Centroid of dimension#" + i), new DoubleType(centroid.getDoublePosition(i)));
-		}
-
-		return res;
+	public String getName() {
+		return name;
 	}
 
+	@Override
+	public void setName(String name) {
+		throw new UnsupportedOperationException("Can't change name of NamedFeature");
+	}
+	// NB: Marker interface
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NamedFeature other = (NamedFeature) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	public OpRef getOp() {
+		return ref;
+	}
 }

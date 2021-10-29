@@ -34,9 +34,6 @@ import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
 import net.imagej.ops.OpService;
-import net.imagej.ops.featuresets.AbstractOpRefFeatureSet;
-import net.imagej.ops.featuresets.DimensionBoundFeatureSet;
-import net.imagej.ops.featuresets.FeatureSet;
 import net.imglib2.type.numeric.RealType;
 
 /**

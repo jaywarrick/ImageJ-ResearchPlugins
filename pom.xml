@@ -26,7 +26,7 @@
 	</organization>
 	<licenses>
 		<license>
-			<name>none</name>
+			<name>MIT</name>
 <!-- 			<url>https://unlicense.org/</url> -->
 			<distribution>repo</distribution>
 		</license>
@@ -80,9 +80,9 @@
 		<enforcer.skip>true</enforcer.skip>
 <!-- 		<bio-formats.version>5.4.1.SNAPSHOT</bio-formats.version> -->
 <!-- 		<scifio-bf-compat.version>1.9.0</scifio-bf-compat.version> -->
-		<imagej-ops.version>0.44.1-SNAPSHOT</imagej-ops.version>
-		<imglib2.version>5.7.1-SNAPSHOT</imglib2.version>
-		<imglib2-roi.version>0.5.1-SNAPSHOT</imglib2-roi.version>
+<!-- 		<imagej-ops.version>0.44.1-SNAPSHOT</imagej-ops.version> -->
+<!-- 		<imglib2.version>5.7.1-SNAPSHOT</imglib2.version> -->
+<!-- 		<imglib2-roi.version>0.5.1-SNAPSHOT</imglib2-roi.version> -->
 
 		<!-- NB: Deploy releases to the SciJava Maven repository. -->
 		<releaseProfiles>deploy-to-scijava</releaseProfiles>
@@ -207,28 +207,4 @@
 		</dependency>
 	</dependencies>
 	
-	<build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-<!--         <version>3.2.0</version> -->
-        <executions>
-          <execution>
-            <id>copy-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-<!--               <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory> -->
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>false</overWriteSnapshots>
-              <overWriteIfNewer>false</overWriteIfNewer>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

@@ -32,10 +32,10 @@ package function.ops.zernike;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
+import function.ops.geometry.Circle;
 import net.imagej.ops.Op;
 import net.imagej.ops.features.zernike.helper.Polynom;
 import net.imagej.ops.features.zernike.helper.ZernikeMoment;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imagej.ops.special.function.AbstractUnaryFunctionOp;
 import net.imagej.types.BigComplex;
 import net.imglib2.IterableInterval;
@@ -48,7 +48,7 @@ import net.imglib2.type.numeric.RealType;
  * Computes a specific zernike moment
  * 
  * @author Andreas Graumann, University of Konstanz
- * @author jaywarrick (added ability to define and calculate enclosing circle)
+ * @author jaywarrick (added ability to define and calculate enclosing circle and double normalization)
  */
 @Plugin(type = Op.class)
 public class DoubleNormalizedZernikeComputer<T extends RealType<T>> extends

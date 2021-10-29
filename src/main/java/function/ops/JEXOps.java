@@ -144,4 +144,18 @@ public class JEXOps {
 		String NAME = "geometry.smallestenclosingcircle";
 	}
 	
+	/**
+	 * Base interface for "stats.pearsonsCorrelationCoefficient" operations.
+	 * <p>
+	 * Implementing classes should be annotated with:
+	 * </p>
+	 *
+	 * <pre>
+	 * @Plugin(type = JEXOps.PearsonsCorrelationCoefficient.class
+	 * </pre>
+	 */
+	public interface PearsonsCorrelationCoefficient extends Op {
+		String NAME = "stats.pearsonsCorrelationCoefficient";
+	}
+	
 }

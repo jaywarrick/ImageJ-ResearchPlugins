@@ -27,51 +27,28 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
+
 package function.ops.featuresets;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.scijava.plugin.Plugin;
-
-import net.imglib2.RealLocalizable;
-import net.imglib2.roi.labeling.LabelRegion;
-import net.imglib2.type.numeric.real.DoubleType;
+import net.imagej.ops.Contingent;
+import net.imglib2.type.numeric.RealType;
 
 /**
- * {@link FeatureSet} to calculate {@link AbstractOpRefFeatureSet<I, O>}.
+ * @author Christian Dietz, University of Konstanz
  * 
- * @author Tim-Oliver Buchholz, University of Konstanz
- * @author jaywarrick
  * @param <I>
  * @param <O>
  */
-@SuppressWarnings("rawtypes")
-@Plugin(type = FeatureSet.class, label = "Centroid", description = "Calculates the Centroid")
-public class CentroidFeatureSet extends AbstractFeatureSet<LabelRegion, DoubleType> {
+public interface DimensionBoundFeatureSet<I, O extends RealType<O>> extends FeatureSet<I, O>, Contingent {
+	/**
+	 * Minimum number of dimensions an object must have to derive features from
+	 * it
+	 */
+	int getMinDimensions();
 
-	@Override
-	public List<NamedFeature> getFeatures() {
-		List<NamedFeature> fs = new ArrayList<NamedFeature>();
-
-		for (int i = 0; i < in().numDimensions(); i++) {
-			fs.add(new NamedFeature("Centroid of dimension#" + i));
-		}
-		return fs;
-	}
-
-	@Override
-	public Map<NamedFeature, DoubleType> calculate(LabelRegion input) {
-		Map<NamedFeature, DoubleType> res = new LinkedHashMap<NamedFeature, DoubleType>();
-		RealLocalizable centroid = ops().geom().centroid(input);
-
-		for (int i = 0; i < getFeatures().size(); i++) {
-			res.put(new NamedFeature("Centroid of dimension#" + i), new DoubleType(centroid.getDoublePosition(i)));
-		}
-
-		return res;
-	}
-
+	/**
+	 * Maximum number of dimensions an object must have to derive features from
+	 * it
+	 */
+	int getMaxDimensions();
 }

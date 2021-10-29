@@ -39,12 +39,9 @@ import org.scijava.ItemIO;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
+import function.ops.geometry.Circle;
 import function.ops.zernike.ZernikeComputer;
 import net.imagej.ops.features.zernike.helper.ZernikeMoment;
-import net.imagej.ops.featuresets.AbstractFeatureSet;
-import net.imagej.ops.featuresets.FeatureSet;
-import net.imagej.ops.featuresets.NamedFeature;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imglib2.IterableInterval;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.type.numeric.real.DoubleType;

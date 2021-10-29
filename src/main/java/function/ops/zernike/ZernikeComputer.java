@@ -33,10 +33,10 @@ import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
 import function.ops.JEXOps;
+import function.ops.geometry.Circle;
 import net.imagej.ops.Op;
 import net.imagej.ops.features.zernike.helper.Polynom;
 import net.imagej.ops.features.zernike.helper.ZernikeMoment;
-import net.imagej.ops.geom.geom2d.Circle;
 import net.imagej.ops.special.function.AbstractUnaryFunctionOp;
 import net.imagej.ops.special.function.Functions;
 import net.imagej.ops.special.function.UnaryFunctionOp;
